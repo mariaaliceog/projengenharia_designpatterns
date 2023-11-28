@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>Cadastro</title>	
+	<link rel="stylesheet" type='text/css' href="./css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="form_box">
+			<h1 class="title">Cadastro de Cliente</h1>
+			<h2 class="subtitle">Dados pessoais</h2>
+			<form class="form" action="addcliente.jsp" method="post">
+				<div class="container-input">
+					<label for="nome">Nome:</label>
+					<input type="text" name="nome" placeholder="Insira um nome" required />
+				</div>
+				<div class="container-input">
+					<label for="cpf">CPF:</label>
+					<input type="text" name="cpf" placeholder="Insira um CPF" required />
+				</div>
+				<div class="container-input">
+					<label for="email">E-mail:</label>
+					<input type="email" name="email" placeholder="Insira um E-mail" required />
+				</div>
+				<div class="container-input">
+					<label for="password">Senha:</label>
+					<input type="password" name="senha" placeholder="Insira uma senha" required />
+				</div>
+				<div class="container-input">
+					<label for="password">Confirmar Senha:</label>
+					<input type="password" name="confirmarSenha" placeholder="Confirme a senha" required />
+				</div>
+				<div class="container-input">
+					<label for="genero">Gênero:</label>
+					<div>
+						<div class="radio-options">
+							<input type="radio" id="feminino" name="genero" value="FEMININO">
+							<label for="feminino">Feminino</label>
+						</div>
+						<div class="radio-options">
+							<input type="radio" id="masculino" name="genero" value="MASCULINO">
+							<label for="masculino">Masculino</label>
+						</div>
+						<div class="radio-options">
+							<input type="radio" id="outro" name="genero" value="OUTRO">
+							<label for="outro">Outro</label>
+						</div>
+					</div>
+				</div>
+				<div class="container-input">
+					<label for="dataNascimento">Data Nascimento:</label>
+					<input type="date" name="dataNascimento" required />
+				</div>
+				<div class="container-input">
+					<label for="tipo">Tipo Telefone: </label>
+					<div>
+						<div class="radio-options">
+							<input type="radio" id="celular" name="tipo" value="CELULAR">
+							<label for="celular">Celular</label>
+						</div>
+						<div class="radio-options">
+							<input type="radio" id="residencial" name="tipo" value="RESIDENCIAL">
+							<label for="residencial">Residencial</label>
+						</div>
+						<div class="radio-options">
+							<input type="radio" id="comercial" name="tipo" value="COMERCIAL">
+							<label for="comercial">Comercial</label>
+						</div>
+						<div class="radio-options">
+							<input type="radio" id="outro" name="tipo" value="OUTRO">
+							<label for="outro">Outro</label>
+						</div>
+					</div>
+				</div>
+				<div class="container-input">
+					<label for="ddd">DDD: </label>
+					<input type="text" name="ddd" placeholder="Ex:11" required />
+				</div>
+				<div class="container-input">
+					<label for="numero">Número Telefone:</label>
+					<input type="text" name="numero" placeholder="Ex: 999999999" required />
+				</div>
+				
+				<h2 class="title">Endereço</h2>
+				<h3 class="subtitle">Endereço Residencial</h3>
+				<div class="container-input">
+					<label for="cep">CEP:</label>
+					<input type="text" name="cep" placeholder="Insira um CEP" required />
+				</div>
+				<div class="container-input">
+					<label for="logradouro">Logradouro:</label>
+					<input type="text" name="logradouro" placeholder="Insira um Logradouro" required />
+				</div>
+				<div class="container-input">
+					<label for="numero">Numero:</label>
+					<input type="text" name="numero" placeholder="Insira um número" required />
+				</div>
+				<div class="container-input">
+					<label for="bairro">Bairro:</label>
+					<input type="text" name="bairro" placeholder="Insira um bairro" required />
+				</div>
+				
+				<h3 class="subtitle">Endereço Cobrança</h3>
+				<div class="container-input">
+					<label for="cep">CEP:</label>
+					<input type="text" name="cep" placeholder="Insira um CEP" required />
+				</div>
+				<div class="container-input">
+					<label for="logradouro">Logradouro:</label>
+					<input type="text" name="logradouro" placeholder="Insira um Logradouro" required />
+				</div>
+				<div class="container-input">
+					<label for="numero">Numero:</label>
+					<input type="text" name="numero" placeholder="Insira um número" required />
+				</div>
+				<div class="container-input">
+					<label for="bairro">Bairro:</label>
+					<input type="text" name="bairro" placeholder="Insira um bairro" required />
+				</div>
+				
+				<h3 class="subtitle">Endereço Entrega</h3>
+				<div class="container-input">
+					<label for="cep">CEP:</label>
+					<input type="text" name="cep" placeholder="Insira um CEP" required />
+				</div>
+				<div class="container-input">
+					<label for="logradouro">Logradouro:</label>
+					<input type="text" name="logradouro" placeholder="Insira um Logradouro" required />
+				</div>
+				<div class="container-input">
+					<label for="numero">Numero:</label>
+					<input type="text" name="numero" placeholder="Insira um número" required />
+				</div>
+				<div class="container-input">
+					<label for="bairro">Bairro:</label>
+					<input type="text" name="bairro" placeholder="Insira um bairro" required />
+				</div>
+				
+				<div class="buttons-container">
+					<a href="viewClientes.jsp" class="botao-proximo-link">
+						<button type="submit">Cadastrar</button>
+					</a>
+					<button class="botao-voltar" type="button" onclick="window.location.href='viewClientes.jsp'">Voltar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>

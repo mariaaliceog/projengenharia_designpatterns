@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cadastro de Cartão</title>	
+	<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+	<div class="container">
+	<h2>Cadastro de Cartão</h2>
+	<form action="addcartao.jsp" method="post">						
+		<table>	
+			<tr>
+			    <td>Bandeira do cartão: </td>
+			    <td>
+			        <select name="bandeiraCartao_id" id="bandeira" style="height: 40px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; padding-left: 10px;margin-bottom: 10px;width:32vh;">
+			            <option value="VISA">Visa</option>
+						<option value="MASTERCARD">Mastercard</option>
+			            <option value="AMERICAN_EXPRESS">American Express</option>
+			            <option value="DISCOVER">Discover</option>
+			        	<option value="DINERS_CLUB">Diners Club</option>
+			        	<option value="JCB">JCB</option>
+			        	<option value="Outras">Outras</option>
+			        </select>
+			    </td>
+			</tr>		
+			<tr>
+			    <td>Número do cartão: </td>
+			    <td><input type="text" name="numero" placeholder="Insira o Número do Cartão"></td>
+			</tr>
+			<tr>
+				<td>Nome do Titular: </td>
+				<td><input type="text" name="nomeTitular" placeholder="Insira o Nome do Titular"></td>
+			</tr>
+			<tr>
+				<td>CVV: </td>
+				<td><input type="text" name="codSeguranca" placeholder="Insira o CVV"></td>
+			</tr>
+			<tr>
+			    <td>Salvar como preferencial?</td>
+			    <td>
+			        <input type="checkbox" name="preferencial" id="preferencialCheckbox">Sim
+			    </td>
+			</tr>			
+			<tr>
+			    <td colspan="2">
+			        <a href="viewCartoes.jsp" class="botao-proximo-link">
+			            <button type="submit">Salvar Cartão</button>
+			        </a>
+			    </td>
+			</tr>
+			<tr>
+				<td colspan="2">
+		        	<button class="botao-voltar" type="button" onclick="window.location.href='viewCartoes.jsp'">Voltar</button>
+		    	</td>
+			</tr>			
+		</table>
+	</form>
+	</div>
+</body>
