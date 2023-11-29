@@ -144,7 +144,8 @@ th, td {
 .ver-enderecos,
 .editar-usuario,
 .excluir-usuario,
-.botao-voltar{
+.botao-voltar,
+.botao-visualizar{
     display: block;
     width: 180px;
     height: 48px;
@@ -185,3 +186,7 @@ input[type="checkbox"] {
 	color: #A9A9A9;
 }
 
+.form_box input[type="checkbox"] {
+    margin-top: 10px; /* Espaçamento superior para separar do rótulo */
+    margin-bottom: 10px; /* Espaçamento inferior para separar de outros elementos */
+}

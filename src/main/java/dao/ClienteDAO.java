@@ -1,5 +1,7 @@
 package dao;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import util.Conexao;
 import java.sql.PreparedStatement;
@@ -28,7 +30,9 @@ public class ClienteDAO implements IDAO {
 			mysql.setString(1,((Cliente) entidade).getNome());
 			mysql.setString(2,((Cliente) entidade).getCpf());
 			mysql.setString(3,((Cliente) entidade).getEmail());
-			mysql.setString(4,((Cliente) entidade).getSenha());
+			String senhaSemHash = ((Cliente) entidade).getSenha();
+	        String senhaHash = senhaCriptografada(senhaSemHash);	        
+			mysql.setString(4, senhaHash);
 			mysql.setString(5,((Cliente) entidade).getGenero().getDescricao());				
 			mysql.setString(6,((Cliente) entidade).getDataNascimento());
 			mysql.setString(7,((Cliente) entidade).getTelefone().getDdd());
@@ -177,17 +181,7 @@ public class ClienteDAO implements IDAO {
 				    telefone.setNumero(rs.getString(7));
 				    cliente.setTelefone(telefone);
 				    
-					cliente.setStatus(rs.getBoolean(8));
-					
-//					List<EntidadeDominio> entidades = consultarCartoesPorCliente(((Cliente)entidade).getId());
-//					List<Cartao> cartoes = new ArrayList<>();
-//
-//					for (EntidadeDominio ent : entidades) {
-//					    if (ent instanceof Cartao) {
-//					        cartoes.add((Cartao) ent);
-//					    }
-//					}
-//					cliente.setCartao(cartoes);
+					cliente.setStatus(rs.getBoolean(8));					
 		            
 				    listaClientes.add(cliente);			
 				}
@@ -269,5 +263,27 @@ public class ClienteDAO implements IDAO {
 
         return status;    
 	}
+	
+	private String senhaCriptografada(String senha) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(senha.getBytes());
+
+            // Converte o hash de bytes para uma representação hexadecimal
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            // Lide com exceções ou propague-as conforme necessário
+            return null;
+        }
+    }
+
 
 }

@@ -66,7 +66,7 @@
                 <td>${endereco.getLogradouro()}</td>
                 <td>${endereco.getNumero()}</td>
                 <td>${endereco.getBairro()}</td>   
-                <td><a href="editendereco.jsp?id=${endereco.getId()}" class="editar-endereco">Editar</a></td>             
+                <td><a href="editenderecoform.jsp?id=${endereco.getId()}" class="editar-endereco">Editar</a></td>             
                 <td><a href="deleteendereco.jsp?id=${endereco.getId()}&clienteId=${clienteId}" class="excluir-endereco" style="color: red">Excluir</a></td>
             </tr>
         </c:forEach>                            

@@ -5,13 +5,11 @@ import java.util.List;
 import dominio.EntidadeDominio;
 
 public class ClienteController extends AbstractController{
-    public String salvar(EntidadeDominio entidade){        
-        System.out.println(entidade);
+    public String salvar(EntidadeDominio entidade){       
         return fachada.salvar(entidade);       
     }
     
     public List<EntidadeDominio> consultar(EntidadeDominio entidade){   	
-    	System.out.println(entidade);
         return fachada.consultar(entidade);
     }
     

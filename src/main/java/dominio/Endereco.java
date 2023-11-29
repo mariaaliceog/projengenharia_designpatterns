@@ -6,6 +6,7 @@ public class Endereco extends EntidadeDominio {
 	private String bairro;
 	private String cep;
 	private Cidade cidade;
+	private String observacao;
 	private TipoEndereco tipoEndereco;
 	private TipoLogradouro tipoLogradouro;	
 	private TipoResidencia tipoResidencia;	
@@ -90,6 +91,14 @@ public class Endereco extends EntidadeDominio {
 
 	public void setIdCidade(int idCidade) {
 		this.idCidade = idCidade;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 	
 }

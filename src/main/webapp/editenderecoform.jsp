@@ -4,15 +4,15 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Cadastro de Endereço</title>
+	<title>Edição de Endereço</title>
 	<link rel="stylesheet" type='text/css' href="./css/style.css">
 </head>
 <body>
 	<%@page import="dao.*, dominio.*, controle.*"%>
 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	<jsp:useBean id="cli" class="dominio.Cliente"></jsp:useBean>
-	<jsp:setProperty property="*" name="cli" />
+	<jsp:useBean id="end" class="dominio.Endereco"></jsp:useBean>
+	<jsp:setProperty property="*" name="end" />
 	
 	<% 		
 		TipoEnderecoDAO tipoEnderecoDAO = new TipoEnderecoDAO();	
@@ -35,19 +35,26 @@
 		request.setAttribute("listaPaises", listaPaises);
 		request.setAttribute("listaEstados", listaEstados);
 		request.setAttribute("listaCidades", listaCidades);	
+		
+	 	ClienteController enderecoController = new ClienteController();
+    	if (end instanceof EntidadeDominio){
+        	EntidadeDominio entidade = (EntidadeDominio) end;    
+	        EntidadeDominio endereco = enderecoController.selecionar(entidade);    
+	        request.setAttribute("endereco", endereco);
+    	}    	
 						
 	%>
 		
 	<div class="container">
 		<div class="form_box">
 			<h1 class="title">Cadastro de Endereço</h1>
-			<form class="form" action="addendereco.jsp" method="post">
-				<input type="hidden" name="idCliente" value="${cli.getId()}"/>							
+			<form class="form" action="editendereco.jsp" method="post">
+				<input type="hidden" name="idCliente" value="${endereco.getIdCliente()}"/>							
 				<div class="container-input">					
 				    <label for="tipo_endereco">Tipo Endereço:</label>				    
 				    <select name="tipoEndereco" id="tipoEndereco">
 		                <c:forEach var="tipoEnd" items="${listaTiposEnd}">
-		                   <option value="<c:out value='${tipoEnd.descricao}'/>">${tipoEnd.descricao}</option>
+		                   <option value="${tipoEnd.descricao}"${tipoEnd.descricao == cliente.getEndereco().getTipoEndereco() ? 'selected="selected"' : ''}>${tipoEnd.descricao}</option>
 		                </c:forEach>
             		</select>
 				</div>
@@ -55,7 +62,7 @@
 				    <label for="tipo_logradouro">Tipo Logradouro:</label>				    
 				    <select name="tipoLogradouro" id="tipoLogradouro">
 		                <c:forEach var="tipoLog" items="${listaTiposLog}">
-		                   <option value="<c:out value='${tipoLog.descricao}'/>">${tipoLog.descricao}</option>
+		                   <option value="${tipoLog.descricao}"${tipoLog.descricao == cliente.getEndereco().getTipoLogradouro() ? 'selected="selected"' : ''}>${tipoLog.descricao}</option>
 		                </c:forEach>
             		</select>
 				</div>
@@ -63,7 +70,7 @@
 				    <label for="tipo_residencia">Tipo Residência:</label>				    
 				    <select name="tipoResidencia" id="tipoResidencia">
 		                <c:forEach var="tipoRes" items="${listaTiposRes}">
-		                   <option value="<c:out value='${tipoRes.descricao}'/>">${tipoRes.descricao}</option>
+		                   <option value="${tipoRes.descricao}"${tipoRes.descricao == cliente.getEndereco().getTipoResidencia() ? 'selected="selected"' : ''}>${tipoRes.descricao}</option>
 		                </c:forEach>
             		</select>
 				</div>				
@@ -93,36 +100,34 @@
 				</div>
 				<div class="container-input">
 				    <label for="cep">CEP:</label>
-				   <input type="text" name="cep" placeholder="Insira o CEP" required>
+				   <input type="text" name="cep" placeholder="Insira o CEP" value="${endereco.getCep()}">
 				</div>
 				<div class="container-input">
 					<label for="logradouro">Logradouro:</label> 
-					<input type="text" name="logradouro" placeholder="Insira o Logradouro" required>
+					<input type="text" name="logradouro" placeholder="Insira o Logradouro" value="${endereco.getLogradouro()}">
 				</div>
 				<div class="container-input">
 					<label for="numero">Número:</label>
-					<input type="text" name="numero" placeholder="Insira o numero" required>
+					<input type="text" name="numero" placeholder="Insira o numero" value="${endereco.getNumero()}">
 				</div>
 				<div class="container-input">
 					<label for="bairro">Bairro:</label> 
-					<input type="text" name="bairro" placeholder="Insira o bairro" required>
+					<input type="text" name="bairro" placeholder="Insira o bairro" value="${endereco.getBairro()}">
 				</div>
 				<div class="container-input">
-					<label for="observacao">Observação:</label> 
-					<input type="text" name="observacao" placeholder="Insira uma observacao">
+					<label for="observacao">Observação:</label>
+					<input type="text" name="observacao" placeholder="Insira uma Observação" value="${endereco.getObservacao()}"/>
 				</div>
 				<div class="buttons-container">		
-				 	<a href="viewEnderecos.jsp?id=${cli.getId()}" class="botao-voltar">
+				 	<a href="viewEnderecos.jsp?id=${endereco.getIdCliente()}" class="botao-voltar">
 			            <button type="button">Voltar</button>
-			        </a>	   
-								
-			        <a href="addendereco.jsp?id=${cli.getId()}" class="botao-proximo-link">
+			        </a>	   								
+			        <a href="viewEnderecos.jsp?id=${endereco.getIdCliente()}" class="botao-proximo-link">
 			            <button type="submit">Salvar Endereco</button>
-			        </a>								
-										
+			        </a>									
 				</div>								
 			</form>
 		</div>
 	</div>
-</body>
+	</body>
 </html>

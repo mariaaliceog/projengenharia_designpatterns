@@ -34,6 +34,7 @@
 		String paisNomeRes = request.getParameter("nomePaisRes");
 		String estadoNomeRes = request.getParameter("nomeEstadoRes");
 		String cidadeNomeRes = request.getParameter("nomeCidadeRes");
+		String observacaoRes = request.getParameter("observacaoRes");
 		
 		String cepCob = request.getParameter("cepCob");
 		String logradouroCob = request.getParameter("logradouroCob");
@@ -44,6 +45,7 @@
 		String paisNomeCob = request.getParameter("nomePaisCob");
 		String estadoNomeCob = request.getParameter("nomeEstadoCob");
 		String cidadeNomeCob = request.getParameter("nomeCidadeCob");
+		String observacaoCob = request.getParameter("observacaoCob");
 		
 		String cepEnt = request.getParameter("cepEnt");
 		String logradouroEnt = request.getParameter("logradouroEnt");
@@ -54,6 +56,7 @@
 		String paisNomeEnt = request.getParameter("nomePaisEnt");
 		String estadoNomeEnt = request.getParameter("nomeEstadoEnt");
 		String cidadeNomeEnt = request.getParameter("nomeCidadeEnt");
+		String observacaoEnt = request.getParameter("observacaoEnt");
 		
 		Cidade cidadeRes = new Cidade();
 		Estado estadoRes = new Estado();
@@ -75,7 +78,7 @@
 		enderecoRes.setTipoEndereco(TipoEndereco.RESIDENCIAL);
 		enderecoRes.setTipoLogradouro(TipoLogradouro.valueOf(tipoLogRes));
 		enderecoRes.setTipoResidencia(TipoResidencia.valueOf(tipoResRes));
-		
+		enderecoRes.setObservacao(observacaoRes);		
 		paisRes.setNome(paisNomeRes);	
 		estadoRes.setNome(estadoNomeRes);
 		estadoRes.setPais(paisRes);
@@ -99,6 +102,7 @@
 		cidadeCob.setNome(cidadeNomeCob);			
 		enderecoCob.setCidade(cidadeCob);				
 		enderecoCob.setIdCliente(Integer.parseInt(cliente));
+		enderecoCob.setObservacao(observacaoCob);
 		
 		
 		Endereco enderecoEnt = new Endereco();
@@ -109,6 +113,7 @@
 		enderecoEnt.setTipoEndereco(TipoEndereco.ENTREGA);
 		enderecoEnt.setTipoLogradouro(TipoLogradouro.valueOf(tipoLogEnt));
 		enderecoEnt.setTipoResidencia(TipoResidencia.valueOf(tipoResEnt));
+		enderecoEnt.setObservacao(observacaoEnt);
 		paisEnt.setNome(paisNomeEnt);	
 		estadoEnt.setNome(estadoNomeEnt);
 		estadoEnt.setPais(paisEnt);

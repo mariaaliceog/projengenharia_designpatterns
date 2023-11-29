@@ -7,11 +7,16 @@
 	<title>Projeto Crud Cliente</title>
 	<link rel="stylesheet" href="./css/style.css">
 <body>
-	<div class="container2">
-		<h1>PROJETO ENGENHARIA III</h1>
-		<div><button type="button" onclick="window.location.href='addclienteform.jsp'">Adicionar Cliente</button></div>
-		<br>
-		<div><button type="button" onclick="window.location.href='viewClientes.jsp'">Visualizar Clientes</button></div>
+	<div class="container">
+		<h1 class="title">PROJETO ENGENHARIA III</h1>
+			<div class="buttons-container">
+				<div>
+					<button type="button" onclick="window.location.href='addclienteform.jsp'" >Adicionar Cliente</button>
+				</div>				
+				<div>
+					<button type="button" class = "botao-visualizar" onclick="window.location.href='viewClientes.jsp'">Visualizar Clientes</button>
+				</div>
+		</div>
 	</div>	
 </body>
 </html>

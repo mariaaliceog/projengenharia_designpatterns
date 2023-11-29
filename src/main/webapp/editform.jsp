@@ -35,8 +35,9 @@
 		<h1 class="title">Edição de Cliente</h1>
 		<h2 class="title2">Dados pessoais</h2>		
 		<form class="form" action="editcliente.jsp" method="post">
-			<input type="hidden" name="id" value="${cli.getId()}"/>		
-			<input type="checkbox" name="status" ${cliente.getStatus() ? "checked" : ""}/> Ativo			
+			<input type="hidden" name="id" value="${cli.getId()}"/>
+			<label for="status" style="font-weight: bold">Ativo:</label>		
+			<input type="checkbox" name="status" ${cliente.getStatus() ? "checked" : ""}/>		
 				<div class="container-input">				
 						<label for="nome">Nome:</label>
 						<input type="text" name="nome" placeholder="Insira o Nome" value="${cliente.getNome()}"/>
@@ -93,7 +94,7 @@
 					<button type="button">Alterar Senha</button>
 				</a>	
 				</div>	
-		</form>
+			</form>
 		</div>
 	</div>
 </body>
