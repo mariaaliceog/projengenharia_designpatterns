@@ -232,26 +232,27 @@ public class ClienteDAO implements IDAO {
 		int status = 0;
         String sql = "UPDATE clientes SET senha = ? WHERE id = ?";
         Connection conn = null;
-        PreparedStatement preparedStatement = null;
+        PreparedStatement mysql = null;
 
         try {
             conn = Conexao.createConnectionToMySQL();
-            preparedStatement = conn.prepareStatement(sql);
+            mysql = conn.prepareStatement(sql);
 
-            // Configurar os parâmetros da consulta           
-            preparedStatement.setString(1, novaSenha);
-            preparedStatement.setInt(2,id);
+            // Configurar os parâmetros da consulta
+            String senhaHash = senhaCriptografada(novaSenha);		
+            mysql.setString(1, senhaHash);
+            mysql.setInt(2,id);
 
             // Executar a atualização da senha
-            status = preparedStatement.executeUpdate();
+            status = mysql.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             // Fechar as conexões e recursos
             try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
+                if (mysql != null) {
+                    mysql.close();
                 }
                 if (conn != null) {
                     conn.close();
