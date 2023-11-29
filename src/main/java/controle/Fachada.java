@@ -59,13 +59,16 @@ public class Fachada implements IFachada {
 
     @Override
 	public String salvar(EntidadeDominio entidade) {    	
-		String classe = entidade.getClass().getName();		
+		String classe = entidade.getClass().getName();
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+	    String metodo = stackTrace[2].getMethodName();
+	    
 		String msg = executar(entidade);
 						
         if (msg == null) {
 			IDAO dao = daos.get(classe);
 			LoggerDAO log = new LoggerDAO();
-			log.saveLogToDatabase(new Date().toString(), classe);
+			log.saveLogToDatabase(new Date().toString(), classe + "." + metodo);
 			return dao.salvar(entidade);
 		} else {
 			return msg;
@@ -76,11 +79,13 @@ public class Fachada implements IFachada {
     @Override
 	public String alterar(EntidadeDominio entidade) {
 		String classe = entidade.getClass().getName();
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+	    String metodo = stackTrace[2].getMethodName();
 		
 		IDAO dao = daos.get(classe);		
 		dao.alterar(entidade);	
 		LoggerDAO log = new LoggerDAO();
-		log.saveLogToDatabase(new Date().toString(), classe);		
+		log.saveLogToDatabase(new Date().toString(), classe + "." + metodo);		
 		return null;
 	}
 

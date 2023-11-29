@@ -122,7 +122,7 @@
 				 	<a href="viewEnderecos.jsp?id=${endereco.getIdCliente()}" class="botao-voltar">
 			            <button type="button">Voltar</button>
 			        </a>	   								
-			        <a href="viewEnderecos.jsp?id=${endereco.getIdCliente()}" class="botao-proximo-link">
+			        <a href="viewEnderecos.jsp?id=${endereco.getId()}&idCliente=${endereco.getIdCliente()}" class="botao-proximo-link">
 			            <button type="submit">Salvar Endereco</button>
 			        </a>									
 				</div>								
