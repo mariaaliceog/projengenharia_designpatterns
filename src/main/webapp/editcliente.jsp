@@ -7,6 +7,16 @@
 
 <%
 	ClienteController clienteController = new ClienteController();
+
+	String dddTelefone = request.getParameter("ddd");
+	String numeroTelefone = request.getParameter("numero");				
+	String tipoTelefone = request.getParameter("tipo");	
+	Telefone telefone = new Telefone();
+	telefone.setDdd(dddTelefone);
+	telefone.setNumero(numeroTelefone);		
+	telefone.setTipo(TipoTelefone.valueOf(tipoTelefone));
+	((Cliente) cli).setTelefone(telefone);	
+	
 	if (cli instanceof EntidadeDominio){
 		EntidadeDominio entidade = (EntidadeDominio) cli;
 		clienteController.alterar(entidade);		

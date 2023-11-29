@@ -66,10 +66,10 @@
 				        </c:otherwise>
 				    </c:choose>
 				</td>			
-				<td><a href="viewCartoes.jsp?id=${cliente.getId()}" class="ver-cartoes">Ver</a></td>
-				<td><a href="viewEnderecos.jsp?id=${cliente.getId()}" class="ver-enderecos">Detalhes</a></td>
-                <td><a href="editform.jsp?id=${cliente.getId()}" class="editar-usuario" style="background-color:rgb(25, 0, 51); color:white; width: 80px;">Editar</a></td>
-                <td><a href="deletecliente.jsp?id=${cliente.getId()}" class="excluir-usuario" style="color: red">Excluir</a></td>
+				<td><a href="viewCartoes.jsp?id=${cliente.getId()}" class="ver-cartoes" style="width: 60px; height: 30px">Ver</a></td>
+				<td><a href="viewEnderecos.jsp?id=${cliente.getId()}" class="ver-enderecos" style="width: 100px; height: 30px">Detalhes</a></td>
+                <td><a href="editform.jsp?id=${cliente.getId()}" class="editar-usuario" style="color:#8FBC8F; width: 60px; height: 30px">Editar</a></td>
+               <td><a href="deletecliente.jsp?id=${cliente.getId()}" class="excluir-usuario" style="color: red; width:60px; height: 30px">Excluir</a></td>
             </tr>
         </c:forEach>                            
     </table>               

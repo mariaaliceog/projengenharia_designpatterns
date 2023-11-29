@@ -21,6 +21,8 @@
 		TipoEnderecoDAO tipoEnderecoDAO = new TipoEnderecoDAO();	
 		TipoLogradouroDAO tipoLogradouroDAO = new TipoLogradouroDAO();
 		TipoResidenciaDAO tipoResidenciaDAO = new TipoResidenciaDAO();
+		TipoTelefoneDAO tipoTelefoneDAO = new TipoTelefoneDAO();
+		
 		PaisDAO paisDAO = new PaisDAO();
 		EstadoDAO estadoDAO = new EstadoDAO();
 		CidadeDAO cidadeDAO = new CidadeDAO();
@@ -28,6 +30,7 @@
 		List<TipoEndereco> listaTiposEnd = tipoEnderecoDAO.consultar();
 		List<TipoLogradouro> listaTiposLog = tipoLogradouroDAO.consultar();
 		List<TipoResidencia> listaTiposRes = tipoResidenciaDAO.consultar();
+		List<TipoTelefone> listaTiposTel = tipoTelefoneDAO.consultar();
 		List<Pais> listaPaises = paisDAO.consultar();
 		List<Estado> listaEstados = estadoDAO.consultar();
 		List<Cidade> listaCidades = cidadeDAO.consultar();		
@@ -35,37 +38,37 @@
 		request.setAttribute("listaTiposEnd", listaTiposEnd);	
 		request.setAttribute("listaTiposLog", listaTiposLog);
 		request.setAttribute("listaTiposRes", listaTiposRes);
+		request.setAttribute("listaTiposTel", listaTiposTel);	
 		request.setAttribute("listaPaises", listaPaises);
 		request.setAttribute("listaEstados", listaEstados);
-		request.setAttribute("listaCidades", listaCidades);	
-		out.println(listaCidades);
+		request.setAttribute("listaCidades", listaCidades);			
 	%>
 	
 	<div class="container">
 		<div class="form_box">
 			<h1 class="title">Cadastro de Cliente</h1>
-			<h2 class="title">Dados pessoais</h2>
+			<h2 class="title2">Dados pessoais</h2>
 			<form class="form" action="addcliente.jsp" method="post">
 			<input type="hidden" name="idCliente" value="${cli.getId()}"/>	
 				<div class="container-input">
 					<label for="nome">Nome:</label>
-					<input type="text" name="nome" required />
+					<input type="text" name="nome" placeholder="Insira o nome" required />
 				</div>
 				<div class="container-input">
 					<label for="cpf">CPF:</label>
-					<input type="text" name="cpf" required />
+					<input type="text" name="cpf" placeholder="Insira o CPF" required />
 				</div>
 				<div class="container-input">
 					<label for="email">E-mail:</label>
-					<input type="email" name="email" required />
+					<input type="email" name="email" placeholder="Insira o E-mail" required />
 				</div>
 				<div class="container-input">
 					<label for="password">Senha:</label>
-					<input type="password" name="senha" required />
+					<input type="password" name="senha" placeholder="Insira a Senha" required />
 				</div>
 				<div class="container-input">
 					<label for="password">Confirmar Senha:</label>
-					<input type="password" name="confirmarSenha" required />
+					<input type="password" name="confirmarSenha" placeholder="Confirme a Senha" required />
 				</div>
 				<div class="container-input">
 					<label for="genero">Gênero:</label>
@@ -88,39 +91,28 @@
 					<label for="dataNascimento">Data Nascimento:</label>
 					<input type="date" name="dataNascimento" required />
 				</div>
-				<h2 class="title">Telefone</h2>
-				<div class="container-input">
-					<label for="tipo">Tipo Telefone: </label>	
-					<div>	
-						<div class="radio-options">					
-							<input type="radio" id="celular" name="tipo" value="CELULAR">
-							<label for="celular">Celular</label>
-						</div>
-						<div class="radio-options">	
-							<input type="radio" id="residencial" name="tipo" value="RESIDENCIAL">
-							<label for="residencial">Residencial</label>
-						</div>
-						<div class="radio-options">	
-							<input type="radio" id="comercial" name="tipo" value="COMERCIAL">
-							<label for="comercial">Comercial</label>
-						</div>
-						<div class="radio-options">	
-							<input type="radio" id="outro" name="tipo" value="OUTRO">
-							<label for="outro">Outro</label>					
-						</div>	
-					</div>
+				
+				<h3 class="title3">Telefone</h3>
+				<div class="container-input">					
+				    <label for="telefone">Tipo Telefone:</label>			    
+				        <select name="tipo" id="tipo">
+				            <c:forEach var="tipoTel" items="${listaTiposTel}">
+				                <option value="<c:out value='${tipoTel.nome}'/>">${tipoTel.nome}</option>
+				            </c:forEach>
+				        </select>			    
 				</div>
+				
 				<div class="container-input">
 					<label for="ddd">DDD: </label>
-					<input type="text" name="ddd" required />
+					<input type="text" name="ddd" placeholder="Insira o DDD" required />
 				</div>
 				<div class="container-input">
 					<label for="numero">Número Telefone:</label>
-					<input type="text" name="numero" required />
+					<input type="text" name="numero" placeholder="Insira o Número de Telefone" required />
 				</div>
 				
-				<h2 class="title">Endereço</h2>
-				<h3 class="title">Endereço Residencial</h3>
+				<h2 class="title2">Endereço</h2>
+				<h3 class="title3">Endereço Residencial</h3>
 				<div class="container-input">					
 				    <label for="pais">País:</label>			    
 				        <select name="nomePaisRes" id="nomePaisRes">
@@ -163,22 +155,22 @@
 				</div>
 				<div class="container-input">
 					<label for="cep">CEP:</label>
-					<input type="text" name="cepRes" required />
+					<input type="text" name="cepRes" placeholder="Insira o CEP" required />
 				</div>
 				<div class="container-input">
 					<label for="logradouro">Logradouro:</label>
-					<input type="text" name="logradouroRes" required />
+					<input type="text" name="logradouroRes" placeholder="Insira o Logradouro" required />
 				</div>
 				<div class="container-input">
 					<label for="numero">Numero:</label>
-					<input type="text" name="numeroRes" required />
+					<input type="text" name="numeroRes" placeholder="Insira o Número" required />
 				</div>
 				<div class="container-input">
 					<label for="bairro">Bairro:</label>
-					<input type="text" name="bairroRes" required />
+					<input type="text" name="bairroRes" placeholder="Insira o Bairro" required />
 				</div>
 				
-				<h3 class="title">Endereço Cobrança</h3>
+				<h3 class="title3">Endereço Cobrança</h3>
 				<div class="container-input">					
 				    <label for="pais">País:</label>			    
 				        <select name="nomePaisCob" id="nomePaisCob">
@@ -221,22 +213,22 @@
 				</div>
 				<div class="container-input">
 					<label for="cep">CEP:</label>
-					<input type="text" name="cepCob" required />
+					<input type="text" name="cepCob" placeholder="Insira o CEP" required />
 				</div>
 				<div class="container-input">
 					<label for="logradouro">Logradouro:</label>
-					<input type="text" name="logradouroCob" required />
+					<input type="text" name="logradouroCob" placeholder="Insira o Logradouro" required />
 				</div>
 				<div class="container-input">
 					<label for="numero">Numero:</label>
-					<input type="text" name="numeroCob" required />
+					<input type="text" name="numeroCob" placeholder="Insira o Número" required />
 				</div>
 				<div class="container-input">
 					<label for="bairro">Bairro:</label>
-					<input type="text" name="bairroCob" required />
+					<input type="text" name="bairroCob" placeholder="Insira o Bairro" required />
 				</div>
 				
-				<h3 class="title">Endereço Entrega</h3>
+				<h3 class="title3">Endereço Entrega</h3>
 				<div class="container-input">					
 				    <label for="pais">País:</label>			    
 				        <select name="nomePaisEnt" id="nomePaisEnt">
@@ -279,26 +271,26 @@
 				</div>
 				<div class="container-input">
 					<label for="cep">CEP:</label>
-					<input type="text" name="cepEnt" required />
+					<input type="text" name="cepEnt" placeholder="Insira o CEP" required />
 				</div>
 				<div class="container-input">
 					<label for="logradouro">Logradouro:</label>
-					<input type="text" name="logradouroEnt" required />
+					<input type="text" name="logradouroEnt" placeholder="Insira o Logradouro" required />
 				</div>
 				<div class="container-input">
 					<label for="numero">Numero:</label>
-					<input type="text" name="numeroEnt" required />
+					<input type="text" name="numeroEnt" placeholder="Insira o Número" required />
 				</div>
 				<div class="container-input">
 					<label for="bairro">Bairro:</label>
-					<input type="text" name="bairroEnt" required />
+					<input type="text" name="bairroEnt" placeholder="Insira o Bairro" required />
 				</div>
 				
 				<div class="buttons-container">
+					<button class="botao-voltar" type="button" onclick="window.location.href='viewClientes.jsp'">Voltar</button>
 					<a href="viewClientes.jsp" class="botao-proximo-link">
 						<button type="submit">Cadastrar</button>
-					</a>
-					<button class="botao-voltar" type="button" onclick="window.location.href='viewClientes.jsp'">Voltar</button>
+					</a>					
 				</div>
 			</form>
 		</div>

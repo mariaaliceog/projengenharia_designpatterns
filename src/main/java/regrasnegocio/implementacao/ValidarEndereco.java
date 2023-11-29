@@ -15,13 +15,13 @@ public class ValidarEndereco implements IStrategy {
         if(entidade instanceof Endereco){            
            Endereco endereco = (Endereco) entidade; //converte entidade para o tipo endereco
             if(endereco.getCep()==null){
-                stringBuilder.append("CEP é obrigatório");
+                stringBuilder.append("Erro: CEP é obrigatório");
             }
             if(endereco.getLogradouro()==null){
-                stringBuilder.append("Logradouro é obrigatório");
+                stringBuilder.append("Erro: Logradouro é obrigatório");
             }
             if(endereco.getBairro()==null){
-                stringBuilder.append("Bairro é obrigatório");
+                stringBuilder.append("Erro: Bairro é obrigatório");
             }                          
                 
         }

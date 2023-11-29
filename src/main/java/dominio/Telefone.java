@@ -4,16 +4,6 @@ public class Telefone extends EntidadeDominio {
 	private TipoTelefone tipo;
 	private String ddd;
 	private String numero;	
-	 
-//	public Telefone(TipoTelefone tipo, String ddd, String numero) {
-//		String[] partes = numero.split(":");
-//		
-//		if (partes.length == 3) {
-//            this.tipo = TipoTelefone.valueOf(partes[0]);
-//            this.ddd = partes[1];
-//            this.numero = partes[2];
-//        }
-//	}
 		
 	public TipoTelefone getTipo() {
 		return tipo;

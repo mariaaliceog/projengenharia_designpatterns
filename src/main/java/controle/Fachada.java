@@ -1,6 +1,7 @@
 package controle;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +64,8 @@ public class Fachada implements IFachada {
 						
         if (msg == null) {
 			IDAO dao = daos.get(classe);
+			LoggerDAO log = new LoggerDAO();
+			log.saveLogToDatabase(new Date().toString(), classe);
 			return dao.salvar(entidade);
 		} else {
 			return msg;
@@ -74,9 +77,10 @@ public class Fachada implements IFachada {
 	public String alterar(EntidadeDominio entidade) {
 		String classe = entidade.getClass().getName();
 		
-		IDAO dao = daos.get(classe);
+		IDAO dao = daos.get(classe);		
 		dao.alterar(entidade);	
-			
+		LoggerDAO log = new LoggerDAO();
+		log.saveLogToDatabase(new Date().toString(), classe);		
 		return null;
 	}
 

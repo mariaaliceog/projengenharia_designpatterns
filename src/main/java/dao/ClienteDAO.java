@@ -13,7 +13,7 @@ import dominio.*;
 public class ClienteDAO implements IDAO {
 	public String salvar(EntidadeDominio entidade) {	
 		String clienteId = null;	
-		String sql = "INSERT INTO clientes(nome, cpf, email, senha, genero, dataNascimento, telefone, status_ativo) VALUES (?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO clientes(nome, cpf, email, senha, genero, dataNascimento, ddd, telefone, tipo_telefone, status_ativo) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		Connection conn = null;
 		PreparedStatement mysql = null;
 		
@@ -31,43 +31,14 @@ public class ClienteDAO implements IDAO {
 			mysql.setString(4,((Cliente) entidade).getSenha());
 			mysql.setString(5,((Cliente) entidade).getGenero().getDescricao());				
 			mysql.setString(6,((Cliente) entidade).getDataNascimento());
-			mysql.setString(7,((Cliente) entidade).getTelefone().getNumero());
-			mysql.setBoolean(8, true); // status ativo por padrao
+			mysql.setString(7,((Cliente) entidade).getTelefone().getDdd());
+			mysql.setString(8,((Cliente) entidade).getTelefone().getNumero());
+			mysql.setString(9,((Cliente) entidade).getTelefone().getTipo().getNome());
+			mysql.setBoolean(10, true); // status ativo por padrao
 			
-			/*
-			 * EnderecoDAO enderecoDAO = new EnderecoDAO(); ((Cliente)
-			 * entidade).getEnderecoResidencial().setIdCliente(((Cliente)
-			 * entidade).getId()); String mensagemResidencial =
-			 * enderecoDAO.salvar(((Cliente) entidade).getEnderecoResidencial());
-			 * System.out.println(mensagemResidencial);
-			 * 
-			 * // Salvar endereço de entrega (apenas o primeiro da lista) if (!((Cliente)
-			 * entidade).getEnderecoEntrega().isEmpty()) { ((Cliente)
-			 * entidade).getEnderecoEntrega().get(0).setIdCliente(((Cliente)
-			 * entidade).getId()); String mensagemEntrega = enderecoDAO.salvar(((Cliente)
-			 * entidade).getEnderecoEntrega().get(0)); System.out.println(mensagemEntrega);
-			 * }
-			 * 
-			 * // Salvar endereço de cobrança (apenas o primeiro da lista) if (!((Cliente)
-			 * entidade).getEnderecoCobranca().isEmpty()) { ((Cliente)
-			 * entidade).getEnderecoCobranca().get(0).setIdCliente(((Cliente)
-			 * entidade).getId()); String mensagemCobranca = enderecoDAO.salvar(((Cliente)
-			 * entidade).getEnderecoCobranca().get(0));
-			 * System.out.println(mensagemCobranca); }
-			 */
-		    	    
-			
-			/*
-			 * if (((Cliente) entidade).getTelefone() != null) { mysql.setString(7,
-			 * ((Cliente) entidade).getTelefone().getNumero()); }
-			 * 
-			 * 
-			 * 
-			 * Telefone telefone = (((Cliente) entidade).getTelefone()); if (telefone !=
-			 * null) { TelefoneDAO telefoneDAO = new TelefoneDAO();
-			 * telefoneDAO.salvar(telefone); }
-			 */
-	        
+			System.out.println(((Cliente) entidade).getTelefone().getDdd());
+			System.out.println(((Cliente) entidade).getTelefone().getNumero());
+			System.out.println(((Cliente) entidade).getTelefone().getTipo().getNome());
 			//	executar a query
 			mysql.execute();
 
@@ -111,13 +82,14 @@ public class ClienteDAO implements IDAO {
 				}
 			}
 		}
+		System.out.println(clienteId);
 		return clienteId;
 	}
 
 	public int alterar(EntidadeDominio entidade) {
 		int status=0;
 		String sql = "UPDATE clientes SET nome=?,"
-	            + "cpf=?, email=?, genero=?, dataNascimento=?, status_ativo=? WHERE id=?";
+	            + "cpf=?, email=?, genero=?, dataNascimento=?, ddd=?, telefone=?, tipo_telefone=?, status_ativo=? WHERE id=?";
 		Connection conn = null;
 		PreparedStatement mysql = null;
 		
@@ -129,11 +101,12 @@ public class ClienteDAO implements IDAO {
 			mysql.setString(2,((Cliente) entidade).getCpf());
 			mysql.setString(3,((Cliente) entidade).getEmail());	
 			mysql.setString(4,((Cliente) entidade).getGenero().getDescricao());
-			mysql.setString(5,((Cliente) entidade).getDataNascimento());
-			mysql.setBoolean(6,((Cliente) entidade).getStatus());
-			//mysql.setString(6,((Cliente) entidade).getTelefone().getTipo().getNome());			
-		    //mysql.setString(7,((Cliente) entidade).getTelefone().getDdd() + ((Cliente) entidade).getTelefone().getNumero());			
-			mysql.setInt(7,((Cliente) entidade).getId());	//id que vai ser atualizado
+			mysql.setString(5,((Cliente) entidade).getDataNascimento());			
+			mysql.setString(6,((Cliente) entidade).getTelefone().getDdd());
+			mysql.setString(7,((Cliente) entidade).getTelefone().getNumero());			
+			mysql.setString(8,((Cliente) entidade).getTelefone().getTipo().getNome());	
+			mysql.setBoolean(9,((Cliente) entidade).getStatus());		    			
+			mysql.setInt(10,((Cliente) entidade).getId());	//id que vai ser atualizado
 			status = mysql.executeUpdate();		
 			
 		}catch(Exception e) {
@@ -237,14 +210,22 @@ public class ClienteDAO implements IDAO {
 			
 			while (rs.next()) {
 				cliente = new Cliente();
+				Telefone telefone = new Telefone();
 				cliente.setId(rs.getInt(1));
 				cliente.setNome(rs.getString(2));
 				cliente.setCpf(rs.getString(3));
 				cliente.setEmail(rs.getString(4));	
 				cliente.setSenha(rs.getString(5));	
 				cliente.setGenero(Genero.valueOf(rs.getString(6)));
-				cliente.setDataNascimento(rs.getString(7));									    
-				cliente.setStatus(rs.getBoolean(8));
+				cliente.setDataNascimento(rs.getString(7));
+				String ddd = rs.getString(8);				
+				telefone.setDdd(ddd);
+				String numeroTelefone = rs.getString(9); 				
+			    telefone.setNumero(numeroTelefone);	
+			    telefone.setTipo(TipoTelefone.valueOf(rs.getString(10)));			    
+			    telefone.setNumero(numeroTelefone);	
+			    cliente.setTelefone(telefone);			    
+				cliente.setStatus(rs.getBoolean(11));
 			}
 		}catch(Exception e) {
 			System.out.println(e);			
@@ -287,33 +268,6 @@ public class ClienteDAO implements IDAO {
         }
 
         return status;    
-	}	
-	
-//	private List<EntidadeDominio> consultarCartoesPorCliente(EntidadeDominio entidade) {
-//	    List<EntidadeDominio> listaCartoes = new ArrayList<>();
-//	    String sql = "SELECT * FROM cartao WHERE cliente_id = ?";
-//
-//	    try {
-//	        Connection conn = Conexao.createConnectionToMySQL();
-//	        PreparedStatement mysql = conn.prepareStatement(sql);
-//	        mysql.setInt(1, ((Cliente)entidade).getId());
-//	        ResultSet rs = mysql.executeQuery();
-//	        while (rs.next()) {
-//	            Cartao cartao = new Cartao();
-//	            cartao.setId(rs.getInt(1));
-//	            cartao.setNumero(rs.getString(2));
-//	            cartao.setNomeTitular(rs.getString(3));
-//	            cartao.setCodSeguranca(rs.getString(4));
-//	            cartao.setPreferencial(rs.getBoolean(5));
-//	            cartao.setBandeira(BandeiraCartao.valueOf(rs.getString(6)));
-//	            listaCartoes.add(cartao);
-//	        }
-//	        conn.close();
-//
-//	    } catch (Exception e) {
-//	        e.printStackTrace();
-//	    }
-//	    return listaCartoes;
-//	}
+	}
 
 }

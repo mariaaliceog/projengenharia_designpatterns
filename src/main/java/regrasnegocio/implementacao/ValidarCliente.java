@@ -17,29 +17,32 @@ public class ValidarCliente implements IStrategy {
         if(entidade instanceof Cliente){            
             Cliente cliente = (Cliente)entidade; //converte entidade para o tipo cliente
             if(cliente.getCpf()==null){
-                stringBuilder.append("CPF é obrigatório");
+                stringBuilder.append("Erro: CPF é obrigatório");
             }
             if(cliente.getEmail()==null){
-                stringBuilder.append("E-mail é obrigatório");
+                stringBuilder.append("Erro: E-mail é obrigatório");
             }
             if(cliente.getNome()==null){
-                stringBuilder.append("Nome é obrigatório");
+                stringBuilder.append("Erro: Nome é obrigatório");
             }
             if(cliente.getDataNascimento()==null){
-                stringBuilder.append("Data de Nascimento é obrigatório");
+                stringBuilder.append("Erro: Data de Nascimento é obrigatório");
             }
             if(cliente.getGenero()==null){
-                stringBuilder.append("Genero é obrigatório");
+                stringBuilder.append("Erro: Genero é obrigatório");
             }
             if(cliente.getSenha()==null) {
-            	stringBuilder.append("Senha é obrigatória");
+            	stringBuilder.append("Erro: Senha é obrigatória");
             }            
             if(cliente.getSenha().length()<8) {
             	System.out.println("menor que 8");
-            	stringBuilder.append("Senha precisa ser maior que 8 caracteres");
+            	stringBuilder.append("Erro: Senha precisa ser maior que 8 caracteres");
             }  
             if(!cliente.getEmail().contains("@")){
-            	stringBuilder.append("E-mail inválido");
+            	stringBuilder.append("Erro: E-mail inválido");
+            }
+            if(!cliente.getSenha().contains(cliente.getConfirmarSenha())) {    
+            	stringBuilder.append("Erro: A senha deve ser igual a confirmar senha");
             }
             
 //            String regexLetras = "/^(?=.[A-Za-z])/";

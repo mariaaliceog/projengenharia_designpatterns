@@ -7,6 +7,6 @@
 <title>Adicionar Cliente</title>
 </head>
 <body>
-	<jsp:include page="clienteform.html"></jsp:include>
+	<jsp:include page="clienteform.jsp"></jsp:include>
 </body>
 </html>

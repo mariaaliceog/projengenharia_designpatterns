@@ -54,7 +54,7 @@ public class ValidarCPF implements IStrategy {
 	            if ((dig10 == c.getCpf().charAt(9)) && (dig11 == c.getCpf().charAt(10)))
 	                 return null;
 	            else
-	            	return "CPF Inválido!";
+	            	return "Erro: CPF Inválido!";
 	        } catch (Exception erro) {
 	                return "Algo inesperado aconteceu!";
 	        }

@@ -9,24 +9,31 @@
 <%	
 	ClienteController clienteController = new ClienteController();
 
-	String numeroTelefone = request.getParameter("numero");		
+	String dddTelefone = request.getParameter("ddd");
+	String numeroTelefone = request.getParameter("numero");				
+	String tipoTelefone = request.getParameter("tipo");	
 	Telefone telefone = new Telefone();
+	telefone.setDdd(dddTelefone);
 	telefone.setNumero(numeroTelefone);		
+	telefone.setTipo(TipoTelefone.valueOf(tipoTelefone));
 	((Cliente) cli).setTelefone(telefone);	
-	
+
 	if (cli instanceof EntidadeDominio){		
 		String cliente = clienteController.salvar((EntidadeDominio) cli);
-		out.println(cliente);
-		 
+		
+		if(cliente.contains("Erro:")){
+			out.println(cliente);
+		}else{		
+		
 		String cepRes = request.getParameter("cepRes");
 		String logradouroRes = request.getParameter("logradouroRes");
 		String numeroRes = request.getParameter("numeroRes");
 		String bairroRes = request.getParameter("bairroRes");
 		String tipoLogRes = request.getParameter("tipoLogradouroRes");
 		String tipoResRes = request.getParameter("tipoResidenciaRes");
-		String paisNomeRes = request.getParameter("paisRes");
-		String estadoNomeRes = request.getParameter("estadoRes");
-		String cidadeNomeRes = request.getParameter("cidadeRes");
+		String paisNomeRes = request.getParameter("nomePaisRes");
+		String estadoNomeRes = request.getParameter("nomeEstadoRes");
+		String cidadeNomeRes = request.getParameter("nomeCidadeRes");
 		
 		String cepCob = request.getParameter("cepCob");
 		String logradouroCob = request.getParameter("logradouroCob");
@@ -34,9 +41,9 @@
 		String bairroCob = request.getParameter("bairroCob");
 		String tipoLogCob = request.getParameter("tipoLogradouroCob");
 		String tipoResCob = request.getParameter("tipoResidenciaCob");
-		String paisNomeCob = request.getParameter("paisCob");
-		String estadoNomeCob = request.getParameter("estadoCob");
-		String cidadeNomeCob = request.getParameter("cidadeCob");
+		String paisNomeCob = request.getParameter("nomePaisCob");
+		String estadoNomeCob = request.getParameter("nomeEstadoCob");
+		String cidadeNomeCob = request.getParameter("nomeCidadeCob");
 		
 		String cepEnt = request.getParameter("cepEnt");
 		String logradouroEnt = request.getParameter("logradouroEnt");
@@ -44,9 +51,9 @@
 		String bairroEnt = request.getParameter("bairroEnt");
 		String tipoLogEnt = request.getParameter("tipoLogradouroEnt");
 		String tipoResEnt = request.getParameter("tipoResidenciaEnt");
-		String paisNomeEnt = request.getParameter("paisEnt");
-		String estadoNomeEnt = request.getParameter("estadoEnt");
-		String cidadeNomeEnt = request.getParameter("cidadeEnt");
+		String paisNomeEnt = request.getParameter("nomePaisEnt");
+		String estadoNomeEnt = request.getParameter("nomeEstadoEnt");
+		String cidadeNomeEnt = request.getParameter("nomeCidadeEnt");
 		
 		Cidade cidadeRes = new Cidade();
 		Estado estadoRes = new Estado();
@@ -113,13 +120,11 @@
 		clienteController.salvar(enderecoRes);
 		clienteController.salvar(enderecoCob);
 		clienteController.salvar(enderecoEnt);
-			
-		/* if(msg!=null){
-			out.println(msg);		
-		}else{
-		response.sendRedirect("viewClientes.jsp");
-		}
-		 */
+		
+		}			
+		
+		response.sendRedirect("viewClientes.jsp");		
+		
 	}else{
 		out.println("O objeto nao e uma instancia de entidade dominio");
 	}

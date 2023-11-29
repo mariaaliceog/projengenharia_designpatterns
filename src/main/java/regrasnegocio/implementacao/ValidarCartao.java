@@ -18,15 +18,15 @@ public class ValidarCartao implements IStrategy {
             Cartao cartao = (Cartao)entidade; //converte entidade para o tipo cartao
             
 			if(cartao.getNumero()==null || cartao.getNumero().equals("")){
-				stringBuilder.append("Número do cartão é obrigatório");
+				stringBuilder.append("Erro: Número do cartão é obrigatório");
 			}
 			if(cartao.getNomeTitular()==null){
-				stringBuilder.append("Nome do Titular é obrigatório");
+				stringBuilder.append("Erro: Nome do Titular é obrigatório");
 			}
             if(cartao.getCodSeguranca()==null || cartao.getCodSeguranca().equals("")){
-				stringBuilder.append("Codigo de segurança é obrigatório");
+				stringBuilder.append("Erro: Codigo de segurança é obrigatório");
 			}else if(cartao.getCodSeguranca().length()!=3){
-                stringBuilder.append("Código de segurança inválido");
+                stringBuilder.append("Erro: Código de segurança inválido");
             }
 			            
 		}

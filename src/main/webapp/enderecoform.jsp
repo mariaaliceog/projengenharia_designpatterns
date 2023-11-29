@@ -35,8 +35,7 @@
 		request.setAttribute("listaPaises", listaPaises);
 		request.setAttribute("listaEstados", listaEstados);
 		request.setAttribute("listaCidades", listaCidades);	
-		out.println(listaCidades);
-				
+						
 	%>
 		
 	<div class="container">
@@ -108,13 +107,14 @@
 					<label for="bairro">Bairro:</label> 
 					<input type="text" name="bairro" placeholder="Insira o bairro">
 				</div>
-				<div class="buttons-container">			   
+				<div class="buttons-container">		
+				 	<a href="viewEnderecos.jsp?id=${cli.getId()}" class="botao-voltar">
+			            <button type="button" class="botao-voltar">Voltar</button>
+			        </a>										
 			        <a href="addendereco.jsp?id=${cli.getId()}" class="botao-proximo-link">
 			            <button type="submit">Salvar Endereco</button>
-			        </a>
-				</div>
-				<div class="buttons-container">
-					<a href="viewEnderecos.jsp?id=${cli.getId()}" class="ver-enderecos">Voltar</a>					
+			        </a>								
+										
 				</div>								
 			</form>
 		</div>

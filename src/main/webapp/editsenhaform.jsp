@@ -22,33 +22,27 @@
     %>
 
 	<div class="container">
-	    <h1>Alterar Senha</h1>
-	    <form action="editsenha.jsp" method="post">
+		<div class="form_box">
+	    <h1 class="title">Alterar Senha</h1>
+	    <form class="form" action="editsenha.jsp" method="post">
 	    	<input type="hidden" name="id" value="${cliente.getId()}"/>
-	    	<table>
-		    	<tr>
-			    	<td><label for="senhaAtual">Senha Atual:</label></td>
-			   		<td><input type="password" name="senhaAtual" required></td>
-			    </tr>
-				<tr>			    			    
-				    <td><label for="novaSenha">Nova Senha:</label></td>
-				    <td><input type="password" name="novaSenha" required></td>
-			    </tr>
-			    <tr>
-				    <td><label for="confirmaSenha">Confirmar Nova Senha:</label></td>
-				    <td><input type="password" name="confirmaSenha" required></td>
-			    </tr>
-			    <tr>	
-			    	<td colspan="2">		    
-			    		<button type="submit">Alterar Senha</button>
-			    	</td>
-			    </tr>
-			    <tr>
-					<td colspan="2">					
-			        	<button class="botao-voltar" type="button" onclick="window.location.href='viewClientes.jsp'">Voltar</button>
-			    	</td>
-				</tr>
-			</table>
+	    		<div class="container-input">
+			    	<label for="senhaAtual">Senha Atual:</label>
+			   		<input type="password" name="senhaAtual" placeholder="Insira a senha atual" required>
+			    </div>
+			    <div class="container-input">			    			    
+				    <label for="novaSenha">Nova Senha:</label>
+				    <input type="password" name="novaSenha" placeholder="Insira a nova senha" required>
+			    </div>
+			    <div class="container-input">
+				    <label for="confirmaSenha">Confirmar Nova Senha:</label>
+				    <input type="password" name="confirmaSenha" placeholder="Confirme a nova senha" required>
+			    </div>	
+			    <div class="buttons-container">			    
+		    		<button type="submit">Alterar Senha</button>
+		    		<button class="botao-voltar" type="button" onclick="window.location.href='viewClientes.jsp'">Voltar</button>
+		    	</div>			
 		</form>  
+		</div>
 	</div>
 </body>
