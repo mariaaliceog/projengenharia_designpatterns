@@ -108,10 +108,12 @@ public class CartaoDAO implements IDAO{
 		List<EntidadeDominio> listaCartoes = new ArrayList<>();
 		String sql = "SELECT id,numero,nomeTitular,codSeguranca, preferencial, descricao_band " +
 		          "FROM cartao as c " +
-		          "INNER JOIN bandeiras_cartao as b ON c.bandeiraCartao_id = b.id_band";	    
+		          "INNER JOIN bandeiras_cartao as b ON c.bandeiraCartao_id = b.id_band WHERE cliente_id=?";	    
 		try {
 	        Connection conn = Conexao.createConnectionToMySQL();
 	        PreparedStatement mysql = conn.prepareStatement(sql);
+	        mysql.setInt(1,((Cartao) entidade).getIdCliente());
+	        
 	        ResultSet rs = mysql.executeQuery();
 		        while (rs.next()) {
 		            Cartao cartao = new Cartao();

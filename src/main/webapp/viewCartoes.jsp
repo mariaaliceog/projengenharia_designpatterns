@@ -14,7 +14,8 @@
 	<jsp:setProperty property="*" name="cart" />
 
     <%
-    	String clienteId = request.getParameter("id");     	
+    	String clienteId = request.getParameter("id"); 
+    	
     	ClienteController cartaoController = new ClienteController(); 
     	
     	Cartao cartao = new Cartao();
